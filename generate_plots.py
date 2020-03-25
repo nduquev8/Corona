@@ -88,19 +88,18 @@ df.iplot(kind="bar",
 
 normed.iplot(kind="bar",
              barmode='stack',
-             filename = plot_folder+"/norm_stack", asUrl=True)
+             filename = plot_folder+"/ns", asUrl=True)
 
 normed.iplot(kind="bar",
-             filename = plot_folder+"/norm", asUrl=True)
+             filename = plot_folder+"/n", asUrl=True)
 
 filtered.iplot(kind="bar",
                barmode='stack',
-               filename = plot_folder+"/raw_stack", 
+               filename = plot_folder+"/rs", 
                colorscale='dflt',
                asUrl=True)
 
-
-countries = filtered.columns.tolist() # in case you want all countries as single plots
-for country in countries:
-    filtered[country].iplot(kind="bar",filename = plot_folder+"/{}".format(country.replace(" ","_").lower()), asUrl=True)
+filtered.iplot(kind="bar",
+               filename = plot_folder+"/r",
+               asUrl=True)
 
