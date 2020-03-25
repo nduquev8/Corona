@@ -32,6 +32,7 @@ pop.pop2019*=1000
 
 
 confirmed_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+#confirmed2_global = "COVID-19/archived_data/archived_time_series/time_series_2019-ncov-Confirmed.csv"
 df = pd.read_csv(confirmed_global)
 df = df.groupby("Country/Region").sum()
 df.drop(labels=["Lat", "Long"],axis=1, inplace= True)
@@ -48,18 +49,19 @@ _exclude = ['Congo (Brazzaville)',
 
 df.drop(labels=_exclude, axis=1, inplace=True)
 
+# Normalized data
 normed = pd.DataFrame()
 for column in df.columns:
     normed[column] =df[column].astype(float)/pop.loc[column][0]
 
-    
 def gen_plots(df, name):
     df.iplot(kind="bar",filename = "app/plots/{}".format(name), asUrl=True)
     countries = ["Colombia", "Germany", "Italy", "Switzerland", "US"]
     # countries = df.columns.tolist() # in case you want all countries as single plots
     for country in countries:
-        df[country].iplot(kind="bar",filename = "app/plots/{}_{}".format(country.replace(" ","_").lower(), name), asUrl=True)
+        df[country].iplot(fill=True, filename = "app/plots/{}_{}".format(country.replace(" ","_").lower(), name), asUrl=True)
 
         
+
 gen_plots(df, "raw")
 gen_plots(normed, "norm")
