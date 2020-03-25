@@ -39,8 +39,8 @@ if os.path.exists(git_repo):
 else:
     os.system("git clone https://github.com/CSSEGISandData/COVID-19")
 
-if not os.path.exists("corona/plots"):
-    os.mkdir("corona/plots")
+if not os.path.exists("app_corona/plots"):
+    os.mkdir("app_corona/plots")
 
 _map = {"Cape Verde": "Cabo Verde",
         "Czech Republic": 'Czechia',
@@ -48,7 +48,7 @@ _map = {"Cape Verde": "Cabo Verde",
         "Taiwan": "Taiwan*", 
         "United States": "US"}
 
-pop = pd.read_csv("corona/population.csv")[["name","pop2019"]]
+pop = pd.read_csv("app_corona/population.csv")[["name","pop2019"]]
 pop.replace(_map,inplace=True)
 pop.index = pop.name
 del pop["name"]
@@ -80,27 +80,27 @@ normed = pd.DataFrame()
 for column in filtered.columns:
     normed[column] =filtered[column].astype(float)/pop.loc[column][0]
 
-
 ### plotting
+plot_folder = "app_corona/plots"
 df.iplot(kind="bar",
          barmode='stack',
-         filename = "corona/plots/all", asUrl=True)
+         filename = plot_folder+"/all", asUrl=True)
 
 normed.iplot(kind="bar",
              barmode='stack',
-             filename = "corona/plots/norm_stack", asUrl=True)
+             filename = plot_folder+"/norm_stack", asUrl=True)
 
 normed.iplot(kind="bar",
-             filename = "corona/plots/norm", asUrl=True)
+             filename = plot_folder+"/norm", asUrl=True)
 
 filtered.iplot(kind="bar",
                barmode='stack',
-               filename = "corona/plots/raw_stack", 
+               filename = plot_folder+"/raw_stack", 
                colorscale='dflt',
                asUrl=True)
 
 
 countries = filtered.columns.tolist() # in case you want all countries as single plots
 for country in countries:
-    filtered[country].iplot(kind="bar",filename = "corona/plots/{}".format(country.replace(" ","_").lower()), asUrl=True)
+    filtered[country].iplot(kind="bar",filename = plot_folder+"/{}".format(country.replace(" ","_").lower()), asUrl=True)
 
