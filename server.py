@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 import os
 
-homedir = "/home/alarm/corona/app"
-#homedir = "/home/christian/Downloads"
+homedir = "/opt/corona/app_corona"
+
 os.chdir(homedir)
 
 app = Flask(__name__, template_folder="plots")

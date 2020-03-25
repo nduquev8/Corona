@@ -3,7 +3,7 @@ Description=Running a Flask App
 
 [Service]  
 Type=simple
-ExecStart=/usr/bin/python3 /home/alarm/corona/app/server.py
+ExecStart=/usr/bin/python3 /opt/corona/app_corona/server.py
 
 [Install]
 WantedBy=multi-user.target
