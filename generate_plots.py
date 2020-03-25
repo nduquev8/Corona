@@ -56,6 +56,7 @@ pop.pop2019*=1000
 
 
 confirmed_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+#confirmed2_global = "COVID-19/archived_data/archived_time_series/time_series_2019-ncov-Confirmed.csv"
 df = pd.read_csv(confirmed_global)
 df = df.groupby("Country/Region").sum()
 df.drop(labels=["Lat", "Long"],axis=1, inplace= True)
@@ -102,5 +103,4 @@ filtered.iplot(kind="bar",
 countries = filtered.columns.tolist() # in case you want all countries as single plots
 for country in countries:
     filtered[country].iplot(kind="bar",filename = "corona/plots/{}".format(country.replace(" ","_").lower()), asUrl=True)
-
 
