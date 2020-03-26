@@ -1,8 +1,8 @@
 import os
-import dropbox as dropbox
+import dropbox
 
 with open(".token") as tk:
-    token = tk.read()
+    token = tk.read().split("\n")[0]
 
 dbx = dropbox.Dropbox(token)
 dbx.users_get_current_account()
