@@ -1,3 +1,4 @@
 plots/**
 .ipynb_checkpoints/**
 *.ipynb
+.token
