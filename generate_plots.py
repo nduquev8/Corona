@@ -147,8 +147,10 @@ confirmed_other = confirmed[other].iloc[-1,:].sum()
 death_other = death[other].iloc[-1,:].sum()
 
 labels = con_dea.columns.tolist()+["Other"]
+total = (con_dea.loc["dead",:]).tolist()+[death_other]
+percentage = (con_dea.loc["dead",:]/sum(total)).tolist()+[death_other/sum(total)]
 rel_deaths = (con_dea.loc["dead",:] * 100 / con_dea.loc["confirmed",:]).tolist()+[death_other*100/confirmed_other]
-labels = ["{}: {:.2f}".format(l, td) for l, td in zip(labels, rel_deaths)]
+labels = ["{}: {} ({:.2f})\n rate {:.2f}".format(l, td) for l, td in zip(labels, total, percentage, rel_deaths)]
 values = con_dea.loc["dead", :].tolist() + [death_other]
 
 fig = go.Figure()
