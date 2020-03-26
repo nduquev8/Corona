@@ -58,8 +58,8 @@ pop.pop2019*=1000
 confirmed_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
 death_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 
-def parse_time_series(df):
-    df = pd.read_csv(confirmed_global)
+def parse_time_series(path):
+    df = pd.read_csv(path)
     df = df.groupby("Country/Region").sum()
     df.drop(labels=["Lat", "Long"],axis=1, inplace= True)
     df = df.transpose()
