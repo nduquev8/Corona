@@ -1,5 +1,6 @@
 import cufflinks as cf
 from plotly.offline import init_notebook_mode
+import plotly.graph_objects as go
 import os
 import pandas as pd
 
@@ -69,6 +70,7 @@ def parse_time_series(path):
 confirmed = parse_time_series(confirmed_global)
 death = parse_time_series(death_global)
 
+
 ## check if country names are right
 unknown = []
 known = []
@@ -81,6 +83,11 @@ for country  in countries_to_track:
 ### preparing filtered data
 confirmed_filtered = confirmed[known]
 death_filtered = death[known]
+
+cfrm = confirmed_filtered.iloc[-1,:]
+dths = death_filtered.iloc[-1,:]
+con_dea = pd.DataFrame(data={"confirmed": cfrm, "dead": dths}).transpose()
+
 
 ### normalizing data
 confirmed_normed = pd.DataFrame()
@@ -111,4 +118,20 @@ confirmed_filtered.iplot(kind="bar",
                          filename = plot_folder+"/r",
                          asUrl=True)
 
+### pie chart
+labels = con_dea.columns.tolist()
+total_deaths = con_dea.loc["dead", :].tolist()
+labels = ["{}: {}".format(l, td) for l, td in zip(labels, total_deaths)]
+values = (con_dea.loc["dead",:] / con_dea.loc["confirmed",:]).tolist()
 
+fig = go.Figure()
+fig.add_trace(
+    go.Pie(labels=labels, 
+           values=values,
+           textinfo='label', 
+           hole=.3,))
+
+fig.update_layout(showlegend=False)
+cf.iplot(figure=fig,
+         filename=plot_folder+"/pie", 
+         asUrl=True,)
