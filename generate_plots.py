@@ -140,17 +140,19 @@ death_growth.iplot(kind="bar",
                    filename = plot_folder+"/rated",
                    asUrl=True)
 
+confirmed_growth.iplot(kind="heatmap", 
+                   title="Growth Rate",
+                   filename = plot_folder+"/ratec_heatmap",
+                   colorscale="reds")
 
 ### pie chart
-
 confirmed_other = confirmed[other].iloc[-1,:].sum()
 death_other = death[other].iloc[-1,:].sum()
 
 labels = con_dea.columns.tolist()+["Other"]
 total = (con_dea.loc["dead",:]).tolist()+[death_other]
-percentage = (con_dea.loc["dead",:]/sum(total)).tolist()+[death_other/sum(total)]
 rel_deaths = (con_dea.loc["dead",:] * 100 / con_dea.loc["confirmed",:]).tolist()+[death_other*100/confirmed_other]
-labels = ["{}: {} ({:.2f})\n rate {:.2f}".format(l, td, p, rel) for l, td, p, rel in zip(labels, total, percentage, rel_deaths)]
+labels = ["{}: {} \n death rate {:.2f}%%".format(l, td, rel) for l, td, p, rel in zip(labels, total, rel_deaths)]
 values = con_dea.loc["dead", :].tolist() + [death_other]
 
 fig = go.Figure()
