@@ -120,9 +120,9 @@ confirmed_filtered.iplot(kind="bar",
 
 ### pie chart
 labels = con_dea.columns.tolist()
-total_deaths = con_dea.loc["dead", :].tolist()
-labels = ["{}: {}".format(l, td) for l, td in zip(labels, total_deaths)]
-values = (con_dea.loc["dead",:] / con_dea.loc["confirmed",:]).tolist()
+total_deaths = (con_dea.loc["dead",:] * 100 / con_dea.loc["confirmed",:]).tolist()
+labels = ["{}: {:.2f}".format(l, td) for l, td in zip(labels, total_deaths)]
+values = con_dea.loc["dead", :].tolist()
 
 fig = go.Figure()
 fig.add_trace(
