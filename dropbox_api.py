@@ -2,7 +2,7 @@ import os
 import dropbox
 
 def update_on_dropbox():
-    with open(".token") as tk:
+    with open("app_corona/.token") as tk:
         token = tk.read().split("\n")[0]
 
     dbx = dropbox.Dropbox(token)
@@ -22,7 +22,7 @@ def update_on_dropbox():
     for file in current_files:
         delete(dbx, file)
 
-    for file in os.listdir("plots"):
-        send(dbx, "plots/"+file)
+    for file in os.listdir("app_corona/plots"):
+        send(dbx, "app_corona/plots/"+file)
     
     
