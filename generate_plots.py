@@ -3,6 +3,7 @@ from plotly.offline import init_notebook_mode
 import plotly.graph_objects as go
 import os
 import pandas as pd
+from dropbox_api import update_on_dropbox
 
 cf.go_offline()
 init_notebook_mode(connected=True)
@@ -99,6 +100,7 @@ for column in confirmed_filtered.columns:
 
 ### plotting
 plot_folder = "app_corona/plots"
+os.system("rm {}/*".format(plot_folder)) 
 
 confirmed.iplot(kind="bar",
                 barmode='stack',
@@ -161,3 +163,7 @@ cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
          asUrl=True)
 
+
+         
+### Pushing plots to dropbox
+update_on_dropbox()
