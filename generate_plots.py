@@ -70,7 +70,6 @@ def parse_time_series(path):
 confirmed = parse_time_series(confirmed_global)
 death = parse_time_series(death_global)
 
-
 ## check if country names are right
 unknown = []
 known = []
@@ -80,6 +79,8 @@ for country  in countries_to_track:
     else:
         known.append(country)
 
+other = list(set(confirmed.columns) - set(known))
+        
 ### preparing filtered data
 confirmed_filtered = confirmed[known]
 death_filtered = death[known]
@@ -88,6 +89,8 @@ cfrm = confirmed_filtered.iloc[-1,:]
 dths = death_filtered.iloc[-1,:]
 con_dea = pd.DataFrame(data={"confirmed": cfrm, "dead": dths}).transpose()
 
+confirmed_growth = confirmed_filtered.diff()
+death_growth = death_filtered.diff()
 
 ### normalizing data
 confirmed_normed = pd.DataFrame()
@@ -99,30 +102,52 @@ plot_folder = "app_corona/plots"
 
 confirmed.iplot(kind="bar",
                 barmode='stack',
-                filename = plot_folder+"/all", asUrl=True)
+                filename = plot_folder+"/all",
+                title="Globally Confirmed Cases",
+                asUrl=True)
 
 confirmed_normed.iplot(kind="bar",
                        barmode='stack',
-                       filename = plot_folder+"/ns", asUrl=True)
+                       filename = plot_folder+"/norms",
+                       title="Confirmed Cases Normed",
+                       asUrl=True)
 
 confirmed_normed.iplot(kind="bar",
-                       filename = plot_folder+"/n", asUrl=True)
+                       filename = plot_folder+"/norm",
+                       title="Confirmed Cases Normed",
+                       asUrl=True)
 
 confirmed_filtered.iplot(kind="bar",
                          barmode='stack',
-                         filename = plot_folder+"/rs", 
-                         colorscale='dflt',
+                         title="Confirmed Cases",
+                         filename = plot_folder+"/raws", 
                          asUrl=True)
 
 confirmed_filtered.iplot(kind="bar",
-                         filename = plot_folder+"/r",
+                         filename = plot_folder+"/raw",
+                         title="Confirmed Cases",
                          asUrl=True)
 
+confirmed_growth.iplot(kind="bar", 
+                       title="Growth Rate",
+                       filename = plot_folder+"/ratec",
+                       asUrl=True)
+
+death_growth.iplot(kind="bar", 
+                   title="Death Rate",
+                   filename = plot_folder+"/rated",
+                   asUrl=True)
+
+
 ### pie chart
-labels = con_dea.columns.tolist()
-total_deaths = (con_dea.loc["dead",:] * 100 / con_dea.loc["confirmed",:]).tolist()
-labels = ["{}: {:.2f}".format(l, td) for l, td in zip(labels, total_deaths)]
-values = con_dea.loc["dead", :].tolist()
+
+confirmed_other = confirmed[other].iloc[-1,:].sum()
+death_other = death[other].iloc[-1,:].sum()
+
+labels = con_dea.columns.tolist()+["Other"]
+rel_deaths = (con_dea.loc["dead",:] * 100 / con_dea.loc["confirmed",:]).tolist()+[death_other*100/confirmed_other]
+labels = ["{}: {:.2f}".format(l, td) for l, td in zip(labels, rel_deaths)]
+values = con_dea.loc["dead", :].tolist() + [death_other]
 
 fig = go.Figure()
 fig.add_trace(
@@ -131,7 +156,8 @@ fig.add_trace(
            textinfo='label', 
            hole=.3,))
 
-fig.update_layout(showlegend=False)
+fig.update_layout(showlegend=False,title="Global Deaths")
 cf.iplot(figure=fig,
-         filename=plot_folder+"/pie", 
-         asUrl=True,)
+         filename=plot_folder+"/death", 
+         asUrl=True)
+
