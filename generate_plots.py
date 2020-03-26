@@ -56,50 +56,59 @@ pop.pop2019*=1000
 
 
 confirmed_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
-#confirmed2_global = "COVID-19/archived_data/archived_time_series/time_series_2019-ncov-Confirmed.csv"
-df = pd.read_csv(confirmed_global)
-df = df.groupby("Country/Region").sum()
-df.drop(labels=["Lat", "Long"],axis=1, inplace= True)
-df = df.transpose()
-df.index = pd.to_datetime(df.index, format="%m/%d/%y")
+death_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+
+def parse_time_series(df):
+    df = pd.read_csv(confirmed_global)
+    df = df.groupby("Country/Region").sum()
+    df.drop(labels=["Lat", "Long"],axis=1, inplace= True)
+    df = df.transpose()
+    df.index = pd.to_datetime(df.index, format="%m/%d/%y")
+    return df
+
+confirmed = parse_time_series(confirmed_global)
+death = parse_time_series(death_global)
 
 ## check if country names are right
 unknown = []
 known = []
 for country  in countries_to_track:
-    if country not in df.columns:
+    if country not in confirmed.columns:
         unknown.append(country)
     else:
         known.append(country)
 
 ### preparing filtered data
-filtered = df[known]
+confirmed_filtered = confirmed[known]
+death_filtered = death[known]
 
 ### normalizing data
-normed = pd.DataFrame()
-for column in filtered.columns:
-    normed[column] =filtered[column].astype(float)/pop.loc[column][0]
+confirmed_normed = pd.DataFrame()
+for column in confirmed_filtered.columns:
+    confirmed_normed[column] =confirmed_filtered[column].astype(float)/pop.loc[column][0]
 
 ### plotting
 plot_folder = "app_corona/plots"
-df.iplot(kind="bar",
-         barmode='stack',
-         filename = plot_folder+"/all", asUrl=True)
 
-normed.iplot(kind="bar",
-             barmode='stack',
-             filename = plot_folder+"/ns", asUrl=True)
+confirmed.iplot(kind="bar",
+                barmode='stack',
+                filename = plot_folder+"/all", asUrl=True)
 
-normed.iplot(kind="bar",
-             filename = plot_folder+"/n", asUrl=True)
+confirmed_normed.iplot(kind="bar",
+                       barmode='stack',
+                       filename = plot_folder+"/ns", asUrl=True)
 
-filtered.iplot(kind="bar",
-               barmode='stack',
-               filename = plot_folder+"/rs", 
-               colorscale='dflt',
-               asUrl=True)
+confirmed_normed.iplot(kind="bar",
+                       filename = plot_folder+"/n", asUrl=True)
 
-filtered.iplot(kind="bar",
-               filename = plot_folder+"/r",
-               asUrl=True)
+confirmed_filtered.iplot(kind="bar",
+                         barmode='stack',
+                         filename = plot_folder+"/rs", 
+                         colorscale='dflt',
+                         asUrl=True)
+
+confirmed_filtered.iplot(kind="bar",
+                         filename = plot_folder+"/r",
+                         asUrl=True)
+
 
