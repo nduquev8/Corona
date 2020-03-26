@@ -151,6 +151,7 @@ death_other = death[other].iloc[-1,:].sum()
 
 labels = con_dea.columns.tolist()+["Other"]
 total = (con_dea.loc["dead",:]).tolist()+[death_other]
+total_deaths =str(sum(total))
 rel_deaths = (con_dea.loc["dead",:] * 100 / con_dea.loc["confirmed",:]).tolist()+[death_other*100/confirmed_other]
 labels = ["{}: {} <br> death rate {:.2f}%".format(l, td, rel) for l, td, rel in zip(labels, total, rel_deaths)]
 values = con_dea.loc["dead", :].tolist() + [death_other]
@@ -168,7 +169,7 @@ fig.add_trace(
 fig.update_layout(showlegend=False, 
                   title="Global Deaths",
                   # Add annotations in the center of the donut pies.
-                  annotations=dict[(text=str(sum(total)), x=0, y=0, font_size=20, showarrow=False)])
+                  annotations=dict[(text=total_deaths, x=0, y=0, font_size=20, showarrow=False)])
 cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
          asUrl=True)
