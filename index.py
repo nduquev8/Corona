@@ -3,25 +3,25 @@ def generate_index():
     
     ### ADD FILES AND LINK TITLES FOR ES HERE
     file_to_es = {
-        'all': 'Total',
-        'raw': 'Total',
-        'raws': 'Datos agregados',
-        'norm': 'Proporcio&#769n',
-        'norms': 'Datos agregados',
-        'ratec': 'Tasa de crecimiento diario',
-        'death': 'Total',
-        'rated': 'Tasa de crecimiento diario'
+        'all.html': 'Total',
+        'raw.html': 'Total',
+        'raws.html': 'Datos agregados',
+        'norm.html': 'Proporcio&#769n',
+        'norms.html': 'Datos agregados',
+        'ratec.html': 'Tasa de crecimiento diario',
+        'death.html': 'Total',
+        'rated.html': 'Tasa de crecimiento diario'
     }
     ### ADD FILES AND LINK TITLES FOR ENG HERE
     file_to_en = {
-        'all': 'Total',
-        'raw': 'Total',
-        'raws': 'Aggregated data',
-        'norm': 'Portion',
-        'norms': 'Aggregated data',
-        'ratec': 'Daily growth rate',
-        'death': 'Total',
-        'rated': 'Daily growth rate'
+        'all.html': 'Total',
+        'raw.html': 'Total',
+        'raws.html': 'Aggregated data',
+        'norm.html': 'Portion',
+        'norms.html': 'Aggregated data',
+        'ratec.html': 'Daily growth rate',
+        'death.html': 'Total',
+        'rated.html': 'Daily growth rate'
     }
         
     hyperlink_format = '<u><a href="{link}" class="text-dark alert-link">{text}</a></u>'
@@ -37,8 +37,8 @@ def generate_index():
                     </form>
 
                   <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-outline-success mr-sm-2" href="index_es" role="button">Español</a>
-                    <a class="btn btn-outline-secondary my-2 my-sm-0" href="index_en" role="button">English</a>
+                    <a class="btn btn-outline-success mr-sm-2" href="index_es.html" role="button">Español</a>
+                    <a class="btn btn-outline-secondary my-2 my-sm-0" href="index_en.html" role="button">English</a>
                   </form>
                 </nav>
               
@@ -72,8 +72,8 @@ def generate_index():
                     </form>
 
                   <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-outline-secondary mr-sm-2" href="index_es" role="button">Español</a>
-                    <a class="btn btn-outline-success my-2 my-sm-0" href="index_en" role="button">English</a>
+                    <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Español</a>
+                    <a class="btn btn-outline-success my-2 my-sm-0" href="index_en.html" role="button">English</a>
                   </form>
                 </nav>
               
