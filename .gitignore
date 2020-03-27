@@ -1,5 +1,7 @@
 plots/**
 .ipynb_checkpoints/**
+.ipynb_checkpoints
 *.ipynb
 .token
 __pycache__/**
+__pycache__

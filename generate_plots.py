@@ -143,7 +143,8 @@ death_growth.iplot(kind="bar",
 confirmed_growth.iplot(kind="heatmap", 
                    title="Growth Rate",
                    filename = plot_folder+"/ratec_heatmap",
-                   colorscale="reds")
+                   colorscale="reds",
+                   asUrl=True)
 
 ### pie chart
 confirmed_other = confirmed[other].iloc[-1,:].sum()
@@ -169,7 +170,7 @@ fig.add_trace(
 fig.update_layout(showlegend=False, 
                   title="Global Deaths",
                   # Add annotations in the center of the donut pies.
-                  annotations=dict[(text=total_deaths, x=0, y=0, font_size=20, showarrow=False)])
+                  annotations=[dict(text=total_deaths, x=0, y=0, font_size=20, showarrow=False)])
 cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
          asUrl=True)
