@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import os
 import pandas as pd
 from dropbox_api import update_on_dropbox
+from index import generate_index
 
 cf.go_offline()
 init_notebook_mode(connected=True)
@@ -175,6 +176,9 @@ cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
          asUrl=True)
 
+         
+### Generate index table of all the plots
+generate_index()
 
          
 ### Pushing plots to dropbox
