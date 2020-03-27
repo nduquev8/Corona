@@ -1,21 +1,21 @@
 
 def generate_index():
      
-    hyperlink_format = '<a href="{link}" class="text-primary alert-link">{text}</a>'
+    hyperlink_format = '<u><a href="{link}" class="text-dark alert-link">{text}</a></u>'
     links = dict(
             all = hyperlink_format.format(link='all.html', text='Total'),
-            raw = hyperlink_format.format(link='raw.html', text=' Total'),
-            raws = hyperlink_format.format(link='raws.html', text=' Datos agregados'),
-            norm = hyperlink_format.format(link='norm.html', text=' Proporcion'),
-            norms = hyperlink_format.format(link='norms.html', text=' Datos agregados'),
-            ratec = hyperlink_format.format(link='ratec.html', text=' Tasa de crecimiento diario'),
-            death = hyperlink_format.format(link='death.html', text=' Total'),
-            rated = hyperlink_format.format(link='rated.html', text=' Tasa de crecimiento diario')
+            raw = hyperlink_format.format(link='raw.html', text='Total'),
+            raws = hyperlink_format.format(link='raws.html', text='Datos agregados'),
+            norm = hyperlink_format.format(link='norm.html', text='Proporcio&#769n'),
+            norms = hyperlink_format.format(link='norms.html', text='Datos agregados'),
+            ratec = hyperlink_format.format(link='ratec.html', text='Tasa de crecimiento diario'),
+            death = hyperlink_format.format(link='death.html', text='Total'),
+            rated = hyperlink_format.format(link='rated.html', text='Tasa de crecimiento diario')
         )
 
-        
+    
 
-        # HTML text 
+    # HTML text 
     t = """
         <!doctype html>
         <html lang="en">
@@ -33,18 +33,20 @@ def generate_index():
             <div class="pt-5 container">
 
                 <h1>Estadi&#769sticas COVID-19</h1>
-                <div class="alert alert-light" role="alert">
                 <br/>
-                  <h4 class="alert-heading">Contagios:</h4>
+                <div class="alert alert-warning" role="alert">
+                <h4 class="alert-heading text-dark"><b>Contagios</b></h4>
                   <p>1. {} de contagios por pais.<br/>
                   2. {} de contagios en paises de intere&#769s. ({})<br/>
                   3. {} de contagios en paises de intere&#769s de acuerdo con la poblacio&#769n.({})<br/>
                   4. {} de contagios en paises de intere&#769s.<br/></p>
-                <br/>
-                  <h4 class="alert-heading">Muertes:</h4>
+                  <br/>
+                </div>
+                <div class="alert alert-danger" role="alert">
+                <h4 class="alert-heading text-dark"><b>Muertes</b></h4>
                   <p>1. {} de muertes en paises de intere&#769s.<br/>
                   2. {} de muertes en paises de intere&#769s.<br/></p>
-                   
+                 
                 </div>
             </div>
             <!-- Optional JavaScript -->
@@ -55,6 +57,7 @@ def generate_index():
           </body>
         </html>
         """.format(*list(links.values()))
+
 
 
     # write html index file
