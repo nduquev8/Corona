@@ -5,10 +5,10 @@ def generate_index():
     links = dict(
         all = hyperlink_format.format(link='all.html', text='Total'),
         raw = hyperlink_format.format(link='raw.html', text=' Total'),
-        raws = hyperlink_format.format(link='raws.html', text=' Datos agregados')
+        raws = hyperlink_format.format(link='raws.html', text=' Datos agregados'),
         norm = hyperlink_format.format(link='norm.html', text=' Proporcion'),
         norms = hyperlink_format.format(link='norms.html', text=' Datos agregados'),
-        ratec = hyperlink_format.format(link='ratec.html', text=' Tasa de crecimiento diario')
+        ratec = hyperlink_format.format(link='ratec.html', text=' Tasa de crecimiento diario'),
         death = hyperlink_format.format(link='death.html', text=' Total'),
         rated = hyperlink_format.format(link='rated.html', text=' Tasa de crecimiento diario')
     )
