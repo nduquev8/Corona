@@ -43,9 +43,9 @@ def generate_index():
               
               
             Muertes:
-              2. {} de muertes en paises de intere&#769s.<br/>
-              4. {} de muertes en paises de intere&#769s.
-              5. 
+              1. {} de muertes en paises de intere&#769s.<br/>
+              2. {} de muertes en paises de intere&#769s.
+               
             </div>
         </div>
         <!-- Optional JavaScript -->
