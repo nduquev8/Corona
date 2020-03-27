@@ -186,6 +186,7 @@ fig.add_trace(go.Pie(labels=labels,
                      values=values,
                      textinfo='label',
                      textfont=dict(size=20),
+                     marker=dict(colors=px.colors.sequential.Inferno),
                      hole=.3,))
 
 fig.update_layout(autosize=True,
