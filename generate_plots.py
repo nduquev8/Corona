@@ -154,7 +154,6 @@ confirmed_growth_max_norm.iplot(kind="heatmap",
                    asUrl=True)
 
 ### pie chart
-### pie chart
 worst=death.iloc[-1,:].sort_values(ascending=False).head(5)
 
 our_countries = ["Colombia", "Germany", "Switzerland", "US"]
@@ -186,17 +185,17 @@ fig = go.Figure()
 fig.add_trace(go.Pie(labels=labels,
                      values=values,
                      textinfo='label',
-                     textfont=dict(size=20),
+                     textfont=dict(size=16),
                      hole=.3,))
 
 fig.update_layout(autosize=True,
                   showlegend=True, 
                   legend  = dict(font=dict(
                                  family='sans-serif',
-                                 size=30,
+                                 size=18,
                                  color='#000'),),
                   title=dict(text="Global Deaths", 
-                             font=(dict(size=50,
+                             font=(dict(size=30,
                                         color='#000'))),
                   # Add annotations in the center of the donut pies.
                   annotations=[dict(text=total_deaths, 
