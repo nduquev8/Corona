@@ -9,6 +9,7 @@ def generate_index():
         'norm.html': 'Proporcio&#769n',
         'norms.html': 'Datos agregados',
         'ratec.html': 'Tasa de crecimiento diario',
+        'ratec_heatmap.html': 'Mapa de calor normalizado',
         'death.html': 'Total',
         'rated.html': 'Tasa de crecimiento diario'
     }
@@ -20,6 +21,7 @@ def generate_index():
         'norm.html': 'Portion',
         'norms.html': 'Aggregated data',
         'ratec.html': 'Daily growth rate',
+        'ratec_heatmap.html': 'Normalized heat map',
         'death.html': 'Total',
         'rated.html': 'Daily growth rate'
     }
@@ -51,7 +53,7 @@ def generate_index():
                       <p>1. {} de contagios por pais.<br/>
                       2. {} de contagios en paises de intere&#769s. ({})<br/>
                       3. {} de contagios en paises de intere&#769s de acuerdo con la poblacio&#769n.({})<br/>
-                      4. {} de contagios en paises de intere&#769s.<br/></p>
+                      4. {} de contagios en paises de intere&#769s.({})<br/></p>
                       <br/>
                     </div>
                     <div class="alert alert-danger" role="alert">
@@ -87,7 +89,7 @@ def generate_index():
                       <p>1. {} number of infections by country.<br/>
                       2. {} number of infections in countries of interest. ({})<br/>
                       3. {} of infections in countries of interest according to population.({})<br/>
-                      4. {} of infections in countries of interest.<br/></p>
+                      4. {} of infections in countries of interest.({})<br/></p>
                       <br/>
                     </div>
                     <div class="alert alert-danger" role="alert">
