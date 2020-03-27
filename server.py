@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder="plots")
 
 @app.route("/")
 def serve():
-    return render_template("index.html")
+    return render_template("index_es.html")
 
 @app.route("/<key>")
 def serve_key(key):
