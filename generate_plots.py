@@ -199,7 +199,7 @@ fig.update_layout(autosize=True,
                                         color='#000'))),
                   # Add annotations in the center of the donut pies.
                   annotations=[dict(text=total_deaths, 
-                                    align = "center", font_size=40, showarrow=False)])
+                                    align = "center", font_size=20, showarrow=False)])
 
 cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
