@@ -6,7 +6,7 @@ def generate_index():
         all = hyperlink_format.format(link='all.html', text='Total'),
         raw = hyperlink_format.format(link='raw.html', text=' Total'),
         raws = hyperlink_format.format(link='raws.html', text=' Datos agregados')
-        norm = hyperlink_format.format(link='norm.html', text=' Proporción'),
+        norm = hyperlink_format.format(link='norm.html', text=' Proporcion'),
         norms = hyperlink_format.format(link='norms.html', text=' Datos agregados'),
         ratec = hyperlink_format.format(link='ratec.html', text=' Tasa de crecimiento diario')
         death = hyperlink_format.format(link='death.html', text=' Total'),
@@ -59,5 +59,5 @@ def generate_index():
 
 
     # write html index file
-    with open(r"plots/index.html", "w") as file:
+    with open(r"app_corona/plots/index.html", "w") as file:
         file.write(t)
