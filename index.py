@@ -39,7 +39,7 @@ def generate_index():
                     </form>
 
                   <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-outline-success mr-sm-2" href="index_es.html" role="button">Español</a>
+                    <a class="btn btn-outline-success mr-sm-2" href="index_es.html" role="button">Espa&ntildeol</a>
                     <a class="btn btn-outline-secondary my-2 my-sm-0" href="index_en.html" role="button">English</a>
                   </form>
                 </nav>
@@ -74,7 +74,7 @@ def generate_index():
                     </form>
 
                   <form class="form-inline my-2 my-lg-0">
-                    <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Español</a>
+                    <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Espa&ntildeol</a>
                     <a class="btn btn-outline-success my-2 my-sm-0" href="index_en.html" role="button">English</a>
                   </form>
                 </nav>
