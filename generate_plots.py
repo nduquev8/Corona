@@ -91,13 +91,19 @@ cfrm = confirmed_filtered.iloc[-1,:]
 dths = death_filtered.iloc[-1,:]
 con_dea = pd.DataFrame(data={"confirmed": cfrm, "dead": dths}).transpose()
 
-confirmed_growth = confirmed_filtered.diff()
-death_growth = death_filtered.diff()
+confirmed_growth = confirmed_filtered.diff().iloc[1:,:]
+death_growth = death_filtered.diff().iloc[1:,:]
 
 ### normalizing data
 confirmed_normed = pd.DataFrame()
 for column in confirmed_filtered.columns:
     confirmed_normed[column] =confirmed_filtered[column].astype(float)/pop.loc[column][0]
+
+confirmed_growth_max_norm = pd.DataFrame()
+for col in confirmed_growth.columns:
+    vals = confirmed_growth[col].values
+    confirmed_growth_max_norm[col] = vals/vals.max()
+
 
 ### plotting
 plot_folder = "app_corona/plots"
@@ -141,7 +147,7 @@ death_growth.iplot(kind="bar",
                    filename = plot_folder+"/rated",
                    asUrl=True)
 
-confirmed_growth.iplot(kind="heatmap", 
+confirmed_growth_max_norm.iplot(kind="heatmap", 
                    title="Growth Rate",
                    filename = plot_folder+"/ratec_heatmap",
                    colorscale="reds",
