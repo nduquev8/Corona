@@ -14,7 +14,7 @@ def serve():
 @app.route("/<key>")
 def serve_key(key):
     try:
-        return render_template("{}.html".format(key))
+        return render_template("{}".format(key))
     except:
         return "<h1>No plot to this shortcut available.</h1><h3>Available endpoints are:\n'{}'.</h3>".format("', '".join([os.path.splitext(n)[0] for n in os.listdir("plots")]))
 
