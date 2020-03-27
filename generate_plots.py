@@ -185,21 +185,21 @@ fig = go.Figure()
 fig.add_trace(go.Pie(labels=labels,
                      values=values,
                      textinfo='label',
-                     textfont=dict(size=16),
+                     textfont=dict(size=20),
                      hole=.3,))
 
 fig.update_layout(autosize=True,
                   showlegend=True, 
                   legend  = dict(font=dict(
                                  family='sans-serif',
-                                 size=18,
+                                 size=20,
                                  color='#000'),),
                   title=dict(text="Global Deaths", 
-                             font=(dict(size=30,
+                             font=(dict(size=40,
                                         color='#000'))),
                   # Add annotations in the center of the donut pies.
                   annotations=[dict(text=total_deaths, 
-                                    align = "center", font_size=20, showarrow=False)])
+                                    align = "center", font_size=40, showarrow=False)])
 
 cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
