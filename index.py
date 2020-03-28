@@ -35,6 +35,7 @@ def generate_index():
               <body>
               
                 <nav class="navbar navbar-light bg-light navbar-right">
+                <a class="navbar-brand" href="#">Corona Statistics</a>
                     <form class="form-inline my-2 my-lg-0">
                     </form>
 
@@ -70,6 +71,7 @@ def generate_index():
               <body>
               
                 <nav class="navbar navbar-light bg-light navbar-right">
+                <a class="navbar-brand" href="#">Corona Statistics</a>
                     <form class="form-inline my-2 my-lg-0">
                     </form>
 
