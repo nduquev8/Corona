@@ -6,6 +6,7 @@ import os
 import pandas as pd
 from dropbox_api import update_on_dropbox
 from index import generate_index
+import matplotlib.pyplot as plt
 
 cf.go_offline()
 init_notebook_mode(connected=True)
@@ -105,6 +106,16 @@ for col in confirmed_growth.columns:
 
 
 ### plotting
+def color_gen(cm='YlOrRd',n=10):
+    # https://matplotlib.org/tutorials/colors/colormaps.html
+    colmap = plt.get_cmap(cm)
+    colors = []
+    for i in range(n):
+        colors.append(
+            "rgb("+",".join([str(int(255*u)) for u in colmap(i/(n-1))[:-1]])+")"
+        )
+    return colors
+
 plot_folder = "app_corona/plots"
 os.system("rm {}/*".format(plot_folder)) 
 
@@ -178,6 +189,9 @@ rel_deaths = (worst.iloc[-1,:] * 100 / confirmed[worst.columns.tolist()].iloc[-1
 labels = ["{}: {} <br> death rate {:.2f}%".format(l, td, rel) for l, td, rel in zip(labels, total, rel_deaths)]
 values = total
 
+vs = sorted(zip(values, labels), key=lambda x: x[0], )
+values, labels = list(zip(*vs))
+colorscale = color_gen('YlOrRd',len(values))
 
 fig = go.Figure()
 
@@ -185,7 +199,7 @@ fig.add_trace(go.Pie(labels=labels,
                      values=values,
                      textinfo='label',
                      textfont=dict(size=20),
-                     marker=dict(colors=px.colors.sequential.Inferno),
+                     marker=dict(colors=colorscale),
                      hole=.3,))
 
 fig.update_layout(autosize=True,
