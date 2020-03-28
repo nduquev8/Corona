@@ -1,6 +1,7 @@
 import cufflinks as cf
 from plotly.offline import init_notebook_mode
 import plotly.graph_objects as go
+import plotly.express as px
 import os
 import pandas as pd
 from dropbox_api import update_on_dropbox
