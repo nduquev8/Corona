@@ -93,6 +93,7 @@ dths = death_filtered.iloc[-1,:]
 con_dea = pd.DataFrame(data={"confirmed": cfrm, "dead": dths}).transpose()
 
 confirmed_growth = confirmed_filtered.diff().iloc[1:,:]
+all_growth = confirmed.diff().iloc[1:,:]
 death_growth = death_filtered.diff().iloc[1:,:]
 
 ### normalizing data
@@ -226,7 +227,7 @@ def plot_fit(series, filename):
     x = np.array(range(len(y)))
     gauss = Gauss(x,y)
     y_pred = gauss.fit()
-    fit_series = pd.Series(y_pred, series.index, name="fit")
+    fit_series = pd.Series(y_pred, series.index, name="Fitted Curve")
     
     _,m,s = gauss.par
     current = sum(y)
@@ -251,7 +252,7 @@ def plot_fit(series, filename):
     return
 
 for country in worst:
-    plot_fit(confirmed_growth[country],
+    plot_fit(all_growth[country],
              filename = plot_folder+"/{}_est".format(country))
 
 
