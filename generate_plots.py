@@ -14,9 +14,7 @@ init_notebook_mode(connected=True)
 countries_to_track = [
     'Australia',
     'Austria',
-    'Canada',
     'China',
-    'Croatia',
     'Czechia',
     'Colombia',
     'France',
