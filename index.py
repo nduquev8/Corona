@@ -1,3 +1,54 @@
+import os
+def add_navbar_to_plots(folder="app_corona/plots"):
+    
+    header="""
+    <head>
+        <!-- Required meta tags -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    </head>
+    """
+    
+    navbar = """
+    <nav class="navbar navbar-light bg-light navbar-right">
+        <a class="navbar-brand" href="#">Corona Statistics</a>
+
+        <form class="form-inline my-2 my-lg-0">
+          <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Inicio</a>
+          <a class="btn btn-outline-secondary my-2 my-sm-0" href="index_en.html" role="button">Home</a>
+        </form>
+    </nav>
+    """
+    
+    footer = """
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    """
+    
+    head = '<html>\n<head><meta charset="utf-8" /></head>\n<body>\n    <div>\n'
+    head_new = '<html>\n{}\n<body>\n{}\n    <div>\n'.format(header, navbar)
+
+    foot = '</div>\n</body>\n</html>'
+    foot_new = '</div>\n{}\n</body>\n</html>'.format(footer)
+    
+    htmls = os.listdir(folder)
+    
+    for html in htmls:
+        if not html.startswith("index"):
+            with open(os.path.join(folder,html)) as f:
+                content = f.read()
+            
+            content = content.replace(head, head_new)
+            content = content.replace(foot, foot_new)
+            
+            with open(os.path.join(folder,html),"w") as f:
+                f.write(content)
+    
 
 def generate_index():
     
@@ -138,3 +189,5 @@ def generate_index():
     # write html index file for eng
     with open(r"app_corona/plots/index_en.html", "w") as file:
         file.write(index[1])
+    
+    add_navbar_to_plots()
