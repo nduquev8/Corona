@@ -4,6 +4,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 import os
 import pandas as pd
+import numpy as np
 from dropbox_api import update_on_dropbox
 from index import generate_index
 import matplotlib.pyplot as plt
