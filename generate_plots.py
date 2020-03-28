@@ -7,6 +7,7 @@ import pandas as pd
 from dropbox_api import update_on_dropbox
 from index import generate_index
 import matplotlib.pyplot as plt
+from gauss import Gauss
 
 cf.go_offline()
 init_notebook_mode(connected=True)
@@ -218,6 +219,41 @@ fig.update_layout(autosize=True,
 cf.iplot(figure=fig,
          filename=plot_folder+"/death", 
          asUrl=True)
+
+
+def plot_fit(series, filename):
+    y=series.tolist()
+    x = np.array(range(len(y)))
+    gauss = Gauss(x,y)
+    y_pred = gauss.fit()
+    fit_series = pd.Series(y_pred, series.index, name="fit")
+    
+    _,m,s = gauss.par
+    current = sum(y)
+    estimate = gauss.estimate_total()
+    
+    fig1 = series.iplot(kind="bar",asFigure=True)
+    fig2 = fit_series.iplot(asFigure=True,
+                            colors=['blue'],
+                            width=2,
+                            dash="dashdot")
+
+    fig = cf.tools.merge_figures([fig1, fig2])
+    fig = go.Figure(fig)
+    fig.update_layout(
+        title_text="Total Infection Estimate<br>-------------------------------"\
+                   "<br>Mean: {:.2f} days, Standard Deviation: {:.2f} days<br>Current: {} people,"\
+                   " Estimate: {} people".format(m,s,current,estimate))
+    
+    cf.iplot(figure=fig,
+             asUrl=True, 
+             filename=filename)
+    return
+
+for country in worst:
+    plot_fit(confirmed_growth[country],
+             filename = plot_folder+"/{}_est".format(country))
+
 
          
 ### Generate index table of all the plots
