@@ -149,17 +149,17 @@ confirmed_filtered.iplot(kind="bar",
                          asUrl=True)
 
 confirmed_growth.iplot(kind="bar", 
-                       title="Growth Rate",
+                       title="Daily Confirmed Cases",
                        filename = plot_folder+"/ratec",
                        asUrl=True)
 
 death_growth.iplot(kind="bar", 
-                   title="Death Rate",
+                   title="Daily Fatalities",
                    filename = plot_folder+"/rated",
                    asUrl=True)
 
 confirmed_growth_max_norm.iplot(kind="heatmap", 
-                   title="Growth Rate",
+                   title="Trend Daily Confirmed Cases",
                    filename = plot_folder+"/ratec_heatmap",
                    colorscale="reds",
                    asUrl=True)
@@ -209,7 +209,7 @@ fig.update_layout(autosize=True,
                                  family='sans-serif',
                                  #size=20,
                                  color='#000'),),
-                  title=dict(text="Global Deaths", 
+                  title=dict(text="Global Fatalities", 
                              font=(dict(#size=40,
                                         color='#000'))),
                   # Add annotations in the center of the donut pies.
