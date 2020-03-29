@@ -135,10 +135,10 @@ def generate_index():
     l3 = link('Datos agregados', 'raws.html')
     l4 = link('Proporcio&#769n', 'norm.html')
     l5 = link('Datos agregados', 'norms.html')
-    l6 = link('Tasa de crecimiento diario', 'ratec.html')
+    l6 = link('Crecimiento diario', 'ratec.html')
     l7 = link('Mapa de calor normalizado', 'ratec_heatmap.html')
     l8 = link('Total', 'death.html')
-    l9 = link('Tasa de crecimiento diario', 'rated.html')
+    l9 = link('Crecimiento diario', 'rated.html')
     l10 = link('Comparacio&#769n','course.html')
     
     links_est = {}
@@ -165,7 +165,7 @@ def generate_index():
                link1=l9)
     e7 = entry(estimate, 
                **links_est)
-    e8 = entry("1. {link1} de los casos desconocidos, recuperados y mortales del virus.", 
+    e8 = entry("1. {link1} de los casos activos, recuperados y mortales del virus.", 
                link1=l10)
     
     a0 = alert("success", "Recuperar", 
@@ -174,7 +174,7 @@ def generate_index():
                [e1, e2, e3, e4])
     a2 = alert("danger", "Muertes", 
                [e5, e6])
-    a3 = alert("info", "extrapolacio&#769n",
+    a3 = alert("info", "Extrapolacio&#769n",
                [e7])
 
     p_es = page("Estadi&#769sticas COVID-19", 
@@ -188,10 +188,10 @@ def generate_index():
     l3 = link('Aggregated data', 'raws.html')
     l4 = link('Portion', 'norm.html')
     l5 = link('Aggregated data', 'norms.html')
-    l6 = link('Daily growth rate', 'ratec.html')
+    l6 = link('Daily growth', 'ratec.html')
     l7 = link('Normalized heat map', 'ratec_heatmap.html')
     l8 = link('Total', 'death.html')
-    l9 = link('Daily growth rate', 'rated.html')
+    l9 = link('Daily growth', 'rated.html')
     l10 = link('Comparison','course.html')
     
     links_est = {}
@@ -218,7 +218,7 @@ def generate_index():
                link1=l9)
     e7  =entry(estimate, 
                **links_est)
-    e8 = entry("1. {link1} of the unknown, recovered and deadly cases of the virus.", 
+    e8 = entry("1. {link1} of the active, recovered and deadly cases of the virus.", 
                link1=l10)
     
     a0 = alert("success", "Recovered", 

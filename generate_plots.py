@@ -110,12 +110,12 @@ for col in confirmed_growth.columns:
     confirmed_growth_max_norm[col] = vals/vals.max()
 
 rec = recovered.T.iloc[:,-1]
-rec.name = "recovered"
+rec.name = "Recovered"
 dea = death.T.iloc[:,-1]
-dea.name = "deceased"
+dea.name = "Deceased"
 con = confirmed.T.iloc[:,-1]
 unk = con - dea - rec
-unk.name = "unknown"
+unk.name = "Active"
 rec_dea_unk = pd.concat([rec,dea,unk], axis=1)
 
 
