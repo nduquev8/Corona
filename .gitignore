@@ -5,4 +5,5 @@ plots/**
 .token
 __pycache__/**
 __pycache__< HEAD
-.pyc
+*.pyc
+*.html
