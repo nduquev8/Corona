@@ -122,6 +122,9 @@ rec_dea_unk = pd.concat([rec,dea,unk], axis=1)
 
 
 ### plotting
+with open("colors") as colors:
+    palette = [line.strip("\n") for line in colors]
+
 def color_gen(cm='YlOrRd',n=10):
     # https://matplotlib.org/tutorials/colors/colormaps.html
     colmap = plt.get_cmap(cm)
@@ -139,38 +142,45 @@ confirmed.iplot(kind="bar",
                 barmode='stack',
                 filename = plot_folder+"/all",
                 title="Globally Confirmed Cases",
+                colors=palette,
                 asUrl=True)
 
 confirmed_normed.iplot(kind="bar",
                        barmode='stack',
                        filename = plot_folder+"/norms",
                        title="Confirmed Cases Normed",
+                       colors=palette,
                        asUrl=True)
 
 confirmed_normed.iplot(kind="bar",
                        filename = plot_folder+"/norm",
                        title="Confirmed Cases Normed",
+                       colors=palette,
                        asUrl=True)
 
 confirmed_filtered.iplot(kind="bar",
                          barmode='stack',
                          title="Confirmed Cases",
                          filename = plot_folder+"/raws", 
+                         colors=palette,
                          asUrl=True)
 
 confirmed_filtered.iplot(kind="bar",
                          filename = plot_folder+"/raw",
                          title="Confirmed Cases",
+                         colors=palette,
                          asUrl=True)
 
 confirmed_growth.iplot(kind="bar", 
                        title="Daily Confirmed Cases",
                        filename = plot_folder+"/ratec",
+                       colors=palette,
                        asUrl=True)
 
 death_growth.iplot(kind="bar", 
                    title="Daily Fatalities",
                    filename = plot_folder+"/rated",
+                   colors=palette,
                    asUrl=True)
 
 confirmed_growth_max_norm.iplot(kind="heatmap", 
