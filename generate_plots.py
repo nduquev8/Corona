@@ -107,6 +107,15 @@ for col in confirmed_growth.columns:
     vals = confirmed_growth[col].values
     confirmed_growth_max_norm[col] = vals/vals.max()
 
+rec = recovered.T.iloc[:,-1]
+rec.name = "recovered"
+dea = death.T.iloc[:,-1]
+dea.name = "deceased"
+con = confirmed.T.iloc[:,-1]
+unk = con - dea - rec
+unk.name = "unknown"
+rec_dea_unk = pd.concat([rec,dea,unk], axis=1)
+
 
 ### plotting
 def color_gen(cm='YlOrRd',n=10):
@@ -256,6 +265,15 @@ for country in worst:
     plot_fit(all_growth[country],
              filename = plot_folder+"/{}_est".format(country))
 
+
+rec_dea_unk.loc[countries_to_track].iplot(
+    kind="bar", 
+    barmode="stack", 
+    colors=["green", "red", "gray"],
+    title="Course of the Infection",
+    filename = plot_folder+"/course",
+    asUrl=True
+)
 
          
 ### Generate index table of all the plots
