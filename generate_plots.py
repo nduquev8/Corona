@@ -34,18 +34,20 @@ countries_to_track = [
 
 ###
 
-homedir = os.path.split(os.path.dirname(os.path.realpath(__file__)))[0]
+homedir = os.path.dirname(os.path.realpath(__file__))
 os.chdir(homedir)
-git_repo = os.path.join(homedir, "COVID-19")
+git_repo = os.path.join(homedir, "..","COVID-19")
 if os.path.exists(git_repo):
     os.chdir(git_repo)
     os.system("git pull")
     os.chdir(homedir)
 else:
+    os.chdir(os.path.join(homedir, ".."))
     os.system("git clone https://github.com/CSSEGISandData/COVID-19")
+    os.chdir(homedir)
 
-if not os.path.exists("app_corona/plots"):
-    os.mkdir("app_corona/plots")
+if not os.path.exists("plots"):
+    os.mkdir("plots")
 
 _map = {"Cape Verde": "Cabo Verde",
         "Czech Republic": 'Czechia',
@@ -53,16 +55,16 @@ _map = {"Cape Verde": "Cabo Verde",
         "Taiwan": "Taiwan*", 
         "United States": "US"}
 
-pop = pd.read_csv("app_corona/population.csv")[["name","pop2019"]]
+pop = pd.read_csv("population.csv")[["name","pop2019"]]
 pop.replace(_map,inplace=True)
 pop.index = pop.name
 del pop["name"]
 pop.pop2019*=1000
 
 
-recovered_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
-confirmed_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
-death_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
+recovered_global = "../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
+confirmed_global = "../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
+death_global = "../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 
 def parse_time_series(path):
     df = pd.read_csv(path)
@@ -130,7 +132,7 @@ def color_gen(cm='YlOrRd',n=10):
         )
     return colors
 
-plot_folder = "app_corona/plots"
+plot_folder = "plots"
 os.system("rm {}/*".format(plot_folder)) 
 
 confirmed.iplot(kind="bar",

@@ -1,5 +1,5 @@
 import os
-def add_navbar_to_plots(folder="app_corona/plots"):
+def add_navbar_to_plots(folder="plots"):
     
     header="""
     <head>
@@ -142,7 +142,7 @@ def generate_index():
     l10 = link('Comparacio&#769n','course.html')
     
     links_est = {}
-    for f in os.listdir("app_corona/plots"):
+    for f in os.listdir("plots"):
         if f.endswith("_est.html"):
             name = f[:-9]
             links_est[name]=link(name, f)
@@ -180,7 +180,7 @@ def generate_index():
     p_es = page("Estadi&#769sticas COVID-19", 
                 [a0, a1, a2, a3])
 
-    save_page(p_es, "app_corona/plots/index_es.html")
+    save_page(p_es, "plots/index_es.html")
 
     ### ENGLISH
     l1 = link('Total', 'all.html')
@@ -195,7 +195,7 @@ def generate_index():
     l10 = link('Comparison','course.html')
     
     links_est = {}
-    for f in os.listdir("app_corona/plots"):
+    for f in os.listdir("plots"):
         if f.endswith("_est.html"):
             name = f[:-9]
             links_est[name]=link(name, f)
@@ -233,7 +233,7 @@ def generate_index():
     p_en=page("COVID-19 Statistics", 
            [a0, a1, a2, a3])
 
-    save_page(p_en, "app_corona/plots/index_en.html")
+    save_page(p_en, "plots/index_en.html")
     
     
     add_navbar_to_plots()
