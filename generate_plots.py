@@ -231,7 +231,7 @@ def plot_fit(series, filename):
     fit_series = pd.Series(y_pred, series.index, name="Fitted Curve")
     
     _,m,s = gauss.par
-    current = sum(y)
+    current = int(sum(y))
     estimate = gauss.estimate_total()
     
     fig1 = series.iplot(kind="bar",asFigure=True)
