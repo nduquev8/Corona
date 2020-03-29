@@ -139,7 +139,17 @@ def generate_index():
     l7 = link('Mapa de calor normalizado', 'ratec_heatmap.html')
     l8 = link('Total', 'death.html')
     l9 = link('Tasa de crecimiento diario', 'rated.html')
-
+    
+    links_est = {}
+    for f in os.listdir("app_corona/plots"):
+        if f.endswith("_est.html"):
+            name = f[:-9]
+            links_est[name]=link(name, f)
+    estimate = "{" + "}, {".join(links_est.keys()) + "}"
+    estimate = "Revisa estas estimaciones."\
+               " Las curvas gaussianas se ajustaron para " + estimate + "."
+    
+    
     e1 = entry("1. {link} de contagios por pais.", 
                link=l1)
     e2 = entry("2. {link1} de contagios en paises de intere&#769s. ({link2})", 
@@ -152,14 +162,17 @@ def generate_index():
                link1=l8)
     e6 = entry("2. {link1} de muertes en paises de intere&#769s.", 
                link1=l9)
-
+    e7  =entry(estimate, **links_est)
+    
     a1=alert("warning", "Contagios", 
              [e1, e2, e3, e4])
     a2=alert("danger", "Muertes", 
              [e5, e6])
+    a3=alert("info", "extrapolacio&#769n",
+             [e7])
 
     p_es=page("Estadi&#769sticas COVID-19", 
-           [a1, a2])
+           [a1, a2, a3])
 
     save_page(p_es, "app_corona/plots/index_es.html")
 
@@ -173,7 +186,17 @@ def generate_index():
     l7 = link('Normalized heat map', 'ratec_heatmap.html')
     l8 = link('Total', 'death.html')
     l9 = link('Daily growth rate', 'rated.html')
-
+    
+    links_est = {}
+    for f in os.listdir("app_corona/plots"):
+        if f.endswith("_est.html"):
+            name = f[:-9]
+            links_est[name]=link(name, f)
+    estimate = "{" + "}, {".join(links_est.keys()) + "}"
+    estimate = "Check out these estimates."\
+               " Gaussian curves were fitted for " + estimate + "."
+    
+    
     e1 = entry("1. {link1} number of infections by country.", 
                link1=l1)
     e2 = entry("2. {link1} number of infections in countries of interest. ({link2})", 
@@ -186,14 +209,18 @@ def generate_index():
                link1=l8)
     e6 = entry("2. {link1} of deaths in countries of interest.", 
                link1=l9)
-
+    e7  =entry(estimate, **links_est)
+    
+    
     a1=alert("warning", "Confirmed", 
              [e1, e2, e3, e4])
     a2=alert("danger", "Deaths", 
              [e5, e6])
+    a3=alert("info", "Extrapolation",
+             [e7])
 
     p_en=page("COVID-19 Statistics", 
-           [a1, a2])
+           [a1, a2, a3])
 
     save_page(p_en, "app_corona/plots/index_en.html")
     
