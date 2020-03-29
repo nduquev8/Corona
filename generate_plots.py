@@ -123,7 +123,7 @@ rec_dea_unk = pd.concat([rec,dea,unk], axis=1)
 
 ### plotting
 with open("colors") as colors:
-    palette = [line.strip("\n") for line in colors]
+    palette = [line.strip("\n") for line in colors if line != "\n"]
 
 def color_gen(cm='YlOrRd',n=10):
     # https://matplotlib.org/tutorials/colors/colormaps.html
