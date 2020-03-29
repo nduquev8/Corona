@@ -60,6 +60,7 @@ del pop["name"]
 pop.pop2019*=1000
 
 
+recovered_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
 confirmed_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
 death_global = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
 
@@ -71,6 +72,7 @@ def parse_time_series(path):
     df.index = pd.to_datetime(df.index, format="%m/%d/%y")
     return df
 
+recovered = parse_time_series(recovered_global)
 confirmed = parse_time_series(confirmed_global)
 death = parse_time_series(death_global)
 

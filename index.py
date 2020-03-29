@@ -231,7 +231,7 @@ def generate_index():
              [e7])
 
     p_en=page("COVID-19 Statistics", 
-           [a1, a2, a3])
+           [a0, a1, a2, a3])
 
     save_page(p_en, "app_corona/plots/index_en.html")
     
