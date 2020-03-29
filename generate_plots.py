@@ -245,7 +245,7 @@ def plot_fit(series, filename):
     fig.update_layout(
         title_text="Total Infection Estimate<br>-------------------------------"\
                    "<br>Current: {} people,"\
-                   " Estimate: {} people".format(m,s,current,estimate))
+                   " Estimate: {} people".format(current,estimate))
     
     cf.iplot(figure=fig,
              asUrl=True, 
