@@ -218,7 +218,7 @@ def generate_index():
                link1=l9)
     e7  =entry(estimate, 
                **links_est)
-    e8 = entry("1. {link1} of the active, recovered and deadly cases of the virus.", 
+    e8 = entry("1. {link1} of the active, recovered and fatal cases of the virus.", 
                link1=l10)
     
     a0 = alert("success", "Recovered", 
