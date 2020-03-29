@@ -244,7 +244,7 @@ def plot_fit(series, filename):
     fig = go.Figure(fig)
     fig.update_layout(
         title_text="Total Infection Estimate<br>-------------------------------"\
-                   "<br>Mean: {:.2f} days, Standard Deviation: {:.2f} days<br>Current: {} people,"\
+                   "<br>Current: {} people,"\
                    " Estimate: {} people".format(m,s,current,estimate))
     
     cf.iplot(figure=fig,
