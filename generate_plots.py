@@ -142,6 +142,7 @@ confirmed.iplot(kind="bar",
                 barmode='stack',
                 filename = plot_folder+"/all",
                 title="Globally Confirmed Cases",
+                yTitle="Capita [-]",
                 colors=palette,
                 asUrl=True)
 
@@ -149,18 +150,21 @@ confirmed_normed.iplot(kind="bar",
                        barmode='stack',
                        filename = plot_folder+"/norms",
                        title="Confirmed Cases Normed",
+                       yTitle="Capita/Population [-]",
                        colors=palette,
                        asUrl=True)
 
 confirmed_normed.iplot(kind="bar",
                        filename = plot_folder+"/norm",
                        title="Confirmed Cases Normed",
+                       yTitle="Capita/Population [-]",
                        colors=palette,
                        asUrl=True)
 
 confirmed_filtered.iplot(kind="bar",
                          barmode='stack',
                          title="Confirmed Cases",
+                         yTitle="Capita [-]",
                          filename = plot_folder+"/raws", 
                          colors=palette,
                          asUrl=True)
@@ -168,18 +172,21 @@ confirmed_filtered.iplot(kind="bar",
 confirmed_filtered.iplot(kind="bar",
                          filename = plot_folder+"/raw",
                          title="Confirmed Cases",
+                         yTitle="Capita [-]",
                          colors=palette,
                          asUrl=True)
 
 confirmed_growth.iplot(kind="bar", 
                        title="Daily Confirmed Cases",
                        filename = plot_folder+"/ratec",
+                       yTitle="Capita [-]",
                        colors=palette,
                        asUrl=True)
 
 death_growth.iplot(kind="bar", 
                    title="Daily Fatalities",
                    filename = plot_folder+"/rated",
+                   yTitle="Capita [-]",
                    colors=palette,
                    asUrl=True)
 
@@ -268,7 +275,8 @@ def plot_fit(series, filename):
     fig.update_layout(
         title_text="Total Infection Estimate<br>-------------------------------"\
                    "<br>Current: {} people,"\
-                   " Estimate: {} people".format(current,estimate))
+                   " Estimate: {} people".format(current,estimate),
+        yaxis_title="Capita [-]")
     
     cf.iplot(figure=fig,
              asUrl=True, 
@@ -286,6 +294,7 @@ rec_dea_unk.loc[countries_to_track].iplot(
     colors=["green", "red", "gray"],
     title="Course of the Infection",
     filename = plot_folder+"/course",
+    yTitle="Capita [-]",
     asUrl=True
 )
 
