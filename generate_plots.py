@@ -7,7 +7,6 @@ import pandas as pd
 import numpy as np
 from dropbox_api import update_on_dropbox
 from index import generate_index
-import matplotlib.pyplot as plt
 from gauss import Gauss
 
 cf.go_offline()
@@ -125,16 +124,6 @@ rec_dea_unk = pd.concat([rec,dea,unk], axis=1)
 with open("colors") as colors:
     palette = [line.strip("\n") for line in colors if line != "\n"]
 
-def color_gen(cm='YlOrRd',n=10):
-    # https://matplotlib.org/tutorials/colors/colormaps.html
-    colmap = plt.get_cmap(cm)
-    colors = []
-    for i in range(n):
-        colors.append(
-            "rgb("+",".join([str(int(255*u)) for u in colmap(i/(n-1))[:-1]])+")"
-        )
-    return colors
-
 plot_folder = "plots"
 os.system("rm {}/*".format(plot_folder)) 
 
@@ -224,7 +213,18 @@ values = total
 
 vs = sorted(zip(values, labels), key=lambda x: x[0], )
 values, labels = list(zip(*vs))
-colorscale = color_gen('YlOrRd',len(values))
+colorscale = [
+    'rgb(255,255,204)',
+    'rgb(255,239,165)',
+    'rgb(254,221,128)',
+    'rgb(254,191,90)',
+    'rgb(253,157,67)',
+    'rgb(252,112,51)',
+    'rgb(243,60,37)',
+    'rgb(217,19,30)',
+    'rgb(181,0,38)',
+    'rgb(128,0,38)'
+]
 
 fig = go.Figure()
 
