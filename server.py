@@ -9,7 +9,7 @@ app = Flask(__name__, template_folder="plots")
 
 @app.route("/")
 def serve():
-    return render_template("index_es.html")
+    return render_template("index_en.html")
 
 @app.route("/<key>")
 def serve_key(key):
@@ -18,4 +18,4 @@ def serve_key(key):
     except:
         return "<h1>No plot to this shortcut available.</h1><h3>Available endpoints are:\n'{}'.</h3>".format("', '".join([n for n in os.listdir("plots")]))
 
-app.run(host="0.0.0.0",port=5000,debug=True)
+app.run(host="0.0.0.0",port=80,debug=True)
