@@ -17,7 +17,7 @@ def add_navbar_to_plots(folder="plots"):
 
         <form class="form-inline my-2 my-lg-0">
           <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Inicio</a>
-          <a class="btn btn-outline-secondary my-2 my-sm-0" href="index_en.html" role="button">Home</a>
+          <a class="btn btn-outline-secondary my-2 my-sm-0" href="index.html" role="button">Home</a>
         </form>
     </nav>
     """
@@ -102,7 +102,7 @@ def page(title, alerts):
 
           <form class="form-inline my-2 my-lg-0">
             <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Espa&ntildeol</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="index_en.html" role="button">English</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="index.html" role="button">English</a>
           </form>
         </nav>
                 
@@ -233,7 +233,7 @@ def generate_index():
     p_en=page("COVID-19 Statistics", 
            [a0, a1, a2, a3])
 
-    save_page(p_en, "plots/index_en.html")
+    save_page(p_en, "plots/index.html")
     
     
     add_navbar_to_plots()
