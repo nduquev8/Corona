@@ -10,7 +10,6 @@ Requirements (linux):
    - jupyter notebook
    - pandas
    - cufflinks
-   - flask
 
 ## Installation
 Run the following commands as root.
@@ -25,12 +24,10 @@ cd /opt/corona
 git clone https://github.com/nduquev8/app_corona
 ```
 
-Create a service managing the flask server. (start and enable)
+Install apache2 as webserver and enable the httpd:
 ```
-ln -s /opt/corona/app_corona/corona.service /etc/systemd/system
-systemctl daemon-reload
-systemctl enable corona.service
-systemctl start corona.service
+systemctl enable httpd.service
+systemctl start httpd.service
 ```
 
 Set sheduled data downloads and plot generation using cron.
@@ -47,3 +44,5 @@ Make sure the **cronie** service is active, if not enable and start it:
 systemctl enable cronie.service
 systemctl start cronie.service
 ```
+
+Ps: The generate_plots script copies the generated html files to /srv/www (the default apache "serve" folder).
