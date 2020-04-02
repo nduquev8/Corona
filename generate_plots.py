@@ -66,8 +66,8 @@ pop.pop2019*=1000
 recovered_global = "../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_recovered_global.csv"
 confirmed_global = "../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_global.csv"
 death_global = "../COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_global.csv"
-#confirmed_US = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv"
-#deaths_US = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv"
+confirmed_US_series = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_confirmed_US.csv"
+deaths_US_series = "COVID-19/csse_covid_19_data/csse_covid_19_time_series/time_series_covid19_deaths_US.csv"
 
 
 def parse_time_series(path):
@@ -78,20 +78,24 @@ def parse_time_series(path):
     df.index = pd.to_datetime(df.index, format="%m/%d/%y")
     return df
 
-#def parse_time_series_state(path):
-#    df = pd.read_csv(path)
-#    df = df.groupby("Province_State").sum()
-#    df.drop(labels=["UID","code3","FIPS",
-#                    "Lat","Long_"],axis=1, inplace= True)
-#    df = df.transpose()
-#    df.index = pd.to_datetime(df.index, format="%m/%d/%y")
-#    return df
-
 recovered = parse_time_series(recovered_global)
 confirmed = parse_time_series(confirmed_global)
 death = parse_time_series(death_global)
-#confirmed_US = parse_time_series_state(confirmed_US)
-#death_US = parse_time_series_state(deaths_US)
+
+
+def parse_time_series_states(path):
+    labels=["UID","code3","FIPS","Lat", "Long_", "Population"]
+    df = pd.read_csv(path)
+    df = df.groupby("Province_State").sum()
+    for l in labels:
+        if l in df.columns:
+            df.drop(labels=l,axis=1, inplace= True)
+    df = df.transpose()
+    df.index = pd.to_datetime(df.index, format="%m/%d/%y")
+    return df
+
+confirmed_US = parse_time_series_states(confirmed_US_series)
+deaths_US = parse_time_series_states(deaths_US_series)
 
 ## check if country names are right
 unknown = []
@@ -105,14 +109,15 @@ for country  in countries_to_track:
 other = list(set(confirmed.columns) - set(known))
 
 ## check if ### US state names are right
-#unknown_US = []
-#known_US = []
-#for state  in states_to_track:
-#    if state not in confirmed_US.columns:
-#        unknown_US.append(state)
-#    else:
-#        known_US.append(state)
-#other = list(set(confirmed_US.columns) - set(known_US))
+unknown_US = []
+known_US = []
+for state  in states_to_track:
+    if state not in confirmed_US.columns:
+        unknown_US.append(state)
+    else:
+        known_US.append(state)
+
+other = list(set(confirmed_US.columns) - set(known_US))
         
 ### preparing filtered data
 ### Global
@@ -128,16 +133,16 @@ all_growth = confirmed.diff().iloc[1:,:]
 death_growth = death_filtered.diff().iloc[1:,:]
 
 ### US
-#confirmed_filtered_US = confirmed_US[known_US]
-#death_filtered_US = death_US[known_US]
+confirmed_filtered_US = confirmed_US[known_US]
+death_filtered_US = deaths_US[known_US]
 
-#us_cfrm = confirmed_filtered_US.iloc[-1,:]
-#us_dths = death_filtered_US.iloc[-1,:]
-#con_dea = pd.DataFrame(data={"confirmed_US": us_cfrm, "dead_US": us_dths}).transpose()
+cfrm_us = confirmed_filtered_US.iloc[-1,:]
+dths_us = death_filtered_US.iloc[-1,:]
+con_dea_us = pd.DataFrame(data={"confirmed_US": cfrm_us, "dead_US": dths_us}).transpose()
 
-#confirmed_growth_US = confirmed_filtered_US.diff().iloc[1:,:]
-#all_growth_US = confirmed_US.diff().iloc[1:,:]
-#death_growth_US = death_filtered_US.diff().iloc[1:,:]
+confirmed_growth_us = confirmed_filtered_US.diff().iloc[1:,:]
+all_growth_us = confirmed_US.diff().iloc[1:,:]
+death_growth_us = death_filtered_US.diff().iloc[1:,:]
 
 
 ### normalizing data
@@ -327,11 +332,9 @@ for country in worst:
     plot_fit(all_growth[country],
              filename = plot_folder+"/{}_est".format(country))
 
-#for state in states_to_track:
-#   print(state)
-#   plot_fit(all_growth_US[state],
-#            filename = plot_folder+"/{}_est".format(state))             
-
+for state in states_to_track:
+    plot_fit(all_growth_us[state],
+             filename = plot_folder+"/{}_est".format(state))
 
 rec_dea_unk.loc[countries_to_track].iplot(
     kind="bar", 
