@@ -305,3 +305,6 @@ generate_index()
          
 ### Pushing plots to dropbox
 update_on_dropbox()
+
+for file in os.listdir("plots"):
+    os.rename("plots/"+file, "/srv/http/"+file)
