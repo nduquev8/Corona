@@ -356,4 +356,5 @@ generate_index()
 update_on_dropbox()
 
 for file in os.listdir("plots"):
-    os.rename("plots/"+file, "/srv/http/"+file)
+    if os.path.exists("/srv/http/"):
+        os.rename("plots/"+file, "/srv/http/"+file)
