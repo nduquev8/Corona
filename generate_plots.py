@@ -28,7 +28,8 @@ countries_to_track = [
     'Sweden',
     'Switzerland',
     'US',
-    'United Kingdom'
+    'United Kingdom',
+    'Brazil'
 ]
 
 states_to_track = ['Illinois']
