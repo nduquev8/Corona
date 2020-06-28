@@ -142,13 +142,13 @@ def generate_index():
     l10 = link('Comparacio&#769n','course.html')
     
     links_est = {}
-    for f in os.listdir("plots"):
-        if f.endswith("_est.html"):
-            name = f[:-9]
-            links_est[name]=link(name, f)
-    estimate = "{" + "}, {".join(links_est.keys()) + "}"
-    estimate = "Revisa estas estimaciones."\
-               " Las curvas gaussianas se ajustaron para " + estimate + "."
+    #for f in os.listdir("plots"):
+    #    if f.endswith("_est.html"):
+    #        name = f[:-9]
+    #        links_est[name]=link(name, f)
+    #estimate = "{" + "}, {".join(links_est.keys()) + "}"
+    #estimate = "Revisa estas estimaciones."\
+    #           " Las curvas gaussianas se ajustaron para " + estimate + "."
     
     
     e1 = entry("1. {link} de contagios por pais.", 
@@ -163,8 +163,8 @@ def generate_index():
                link1=l8)
     e6 = entry("2. {link1} de muertes en paises de intere&#769s.", 
                link1=l9)
-    e7 = entry(estimate, 
-               **links_est)
+    #e7 = entry(estimate, 
+    #           **links_est)
     e8 = entry("1. {link1} de los casos activos, recuperados y mortales del virus.", 
                link1=l10)
     
@@ -174,11 +174,11 @@ def generate_index():
                [e1, e2, e3, e4])
     a2 = alert("danger", "Muertes", 
                [e5, e6])
-    a3 = alert("info", "Extrapolacio&#769n",
-               [e7])
+   # a3 = alert("info", "Extrapolacio&#769n",
+   #            [e7])
 
     p_es = page("Estadi&#769sticas COVID-19", 
-                [a0, a1, a2, a3])
+                [a0, a1, a2])#, a3])
 
     save_page(p_es, "plots/index_es.html")
 
@@ -192,16 +192,16 @@ def generate_index():
     l7 = link('Normalized heat map', 'ratec_heatmap.html')
     l8 = link('Total', 'death.html')
     l9 = link('Daily growth', 'rated.html')
-    l10 = link('Comparison','course.html')
+    l10 = link(x'Comparison','course.html')
     
     links_est = {}
-    for f in os.listdir("plots"):
-        if f.endswith("_est.html"):
-            name = f[:-9]
-            links_est[name]=link(name, f)
-    estimate = "{" + "}, {".join(links_est.keys()) + "}"
-    estimate = "Check out these estimates."\
-               " Gaussian curves were fitted for " + estimate + "."
+    #for f in os.listdir("plots"):
+    #    if f.endswith("_est.html"):
+    #        name = f[:-9]
+    #        links_est[name]=link(name, f)
+    #estimate = "{" + "}, {".join(links_est.keys()) + "}"
+    #estimate = "Check out these estimates."\
+    #           " Gaussian curves were fitted for " + estimate + "."
     
     
     e1 = entry("1. {link1} number of infections by country.", 
@@ -216,8 +216,8 @@ def generate_index():
                link1=l8)
     e6 = entry("2. {link1} of deaths in countries of interest.", 
                link1=l9)
-    e7  =entry(estimate, 
-               **links_est)
+    #e7  =entry(estimate, 
+    #           **links_est)
     e8 = entry("1. {link1} of the active, recovered and fatal cases of the virus.", 
                link1=l10)
     
@@ -227,11 +227,11 @@ def generate_index():
              [e1, e2, e3, e4])
     a2=alert("danger", "Deaths", 
              [e5, e6])
-    a3=alert("info", "Extrapolation",
-             [e7])
+    #a3=alert("info", "Extrapolation",
+    #         [e7])
 
     p_en=page("COVID-19 Statistics", 
-           [a0, a1, a2, a3])
+           [a0, a1, a2])#, a3])
 
     save_page(p_en, "plots/index.html")
     
