@@ -31,7 +31,7 @@ countries_to_track = [
     'United Kingdom'
 ]
 
-states_to_track = ['Illinois']
+states_to_track = ['Illinois', 'Massachusetts']
 
 ###
 
