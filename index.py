@@ -168,7 +168,7 @@ def generate_index():
     e8 = entry("1. {link1} de los casos activos, recuperados y mortales del virus.", 
                link1=l10)
     
-    a0 = alert("success", "Recuperar", 
+    a0 = alert("success", "Recuperdos", 
                [e8])
     a1 = alert("warning", "Contagios", 
                [e1, e2, e3, e4])
