@@ -16,8 +16,8 @@ def add_navbar_to_plots(folder="plots"):
         <a class="navbar-brand" href="#">Corona Statistics</a>
 
         <form class="form-inline my-2 my-lg-0">
-          <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Inicio</a>
-          <a class="btn btn-outline-secondary my-2 my-sm-0" href="index.html" role="button">Home</a>
+          <a class="btn btn-outline-secondary mr-sm-2" href="index_EPS.html" role="button">Inicio</a>
+          <a class="btn btn-outline-secondary my-2 my-sm-0" href="index_ENG.html" role="button">Home</a>
         </form>
     </nav>
     """
@@ -101,8 +101,8 @@ def page(title, alerts):
             </form>
 
           <form class="form-inline my-2 my-lg-0">
-            <a class="btn btn-outline-secondary mr-sm-2" href="index_es.html" role="button">Espa&ntildeol</a>
-            <a class="btn btn-outline-success my-2 my-sm-0" href="index.html" role="button">English</a>
+            <a class="btn btn-outline-secondary mr-sm-2" href="index_ESP.html" role="button">Espa&ntildeol</a>
+            <a class="btn btn-outline-success my-2 my-sm-0" href="index_ENG.html" role="button">English</a>
           </form>
         </nav>
                 
@@ -127,7 +127,7 @@ def save_page(page, path):
     with open(path,"w") as html:
         html.write(page)
 
-def generate_index():
+def generate_index(folder="plots"):
     
     ### SPANISH
     l1 = link('Total', 'all.html')
@@ -142,13 +142,13 @@ def generate_index():
     l10 = link('Comparacio&#769n','course.html')
     
     links_est = {}
-    #for f in os.listdir("plots"):
-    #    if f.endswith("_est.html"):
-    #        name = f[:-9]
-    #        links_est[name]=link(name, f)
-    #estimate = "{" + "}, {".join(links_est.keys()) + "}"
-    #estimate = "Revisa estas estimaciones."\
-    #           " Las curvas gaussianas se ajustaron para " + estimate + "."
+    for f in os.listdir(folder):
+       if f.endswith("_est.html"):
+           name = f[:-9]
+           links_est[name]=link(name, f)
+    estimate = "{" + "}, {".join(links_est.keys()) + "}"
+    estimate = "Revisa estas estimaciones."\
+              " Las curvas gaussianas se ajustaron para " + estimate + "."
     
     
     e1 = entry("1. {link} de contagios por pais.", 
@@ -163,8 +163,8 @@ def generate_index():
                link1=l8)
     e6 = entry("2. {link1} de muertes en paises de intere&#769s.", 
                link1=l9)
-    #e7 = entry(estimate, 
-    #           **links_est)
+    e7 = entry(estimate, 
+              **links_est)
     e8 = entry("1. {link1} de los casos activos, recuperados y mortales del virus.", 
                link1=l10)
     
@@ -174,13 +174,13 @@ def generate_index():
                [e1, e2, e3, e4])
     a2 = alert("danger", "Muertes", 
                [e5, e6])
-   # a3 = alert("info", "Extrapolacio&#769n",
-   #            [e7])
+    a3 = alert("info", "Extrapolacio&#769n",
+               [e7])
 
-    p_es = page("Estadi&#769sticas COVID-19", 
-                [a0, a1, a2])#, a3])
+    p_esp = page("Estadi&#769sticas COVID-19", 
+                [a0, a1, a2, a3])#])
 
-    save_page(p_es, "plots/index_es.html")
+    save_page(p_esp, folder+"/index_ESP.html")
 
     ### ENGLISH
     l1 = link('Total', 'all.html')
@@ -192,16 +192,16 @@ def generate_index():
     l7 = link('Normalized heat map', 'ratec_heatmap.html')
     l8 = link('Total', 'death.html')
     l9 = link('Daily growth', 'rated.html')
-    l10 = link(x'Comparison','course.html')
+    l10 = link('Comparison','course.html')
     
     links_est = {}
-    #for f in os.listdir("plots"):
-    #    if f.endswith("_est.html"):
-    #        name = f[:-9]
-    #        links_est[name]=link(name, f)
-    #estimate = "{" + "}, {".join(links_est.keys()) + "}"
-    #estimate = "Check out these estimates."\
-    #           " Gaussian curves were fitted for " + estimate + "."
+    for f in os.listdir(folder):
+       if f.endswith("_est.html"):
+           name = f[:-9]
+           links_est[name]=link(name, f)
+    estimate = "{" + "}, {".join(links_est.keys()) + "}"
+    estimate = "Check out these estimates."\
+              " Gaussian curves were fitted for " + estimate + "."
     
     
     e1 = entry("1. {link1} number of infections by country.", 
@@ -216,8 +216,8 @@ def generate_index():
                link1=l8)
     e6 = entry("2. {link1} of deaths in countries of interest.", 
                link1=l9)
-    #e7  =entry(estimate, 
-    #           **links_est)
+    e7  =entry(estimate, 
+              **links_est)
     e8 = entry("1. {link1} of the active, recovered and fatal cases of the virus.", 
                link1=l10)
     
@@ -227,13 +227,13 @@ def generate_index():
              [e1, e2, e3, e4])
     a2=alert("danger", "Deaths", 
              [e5, e6])
-    #a3=alert("info", "Extrapolation",
-    #         [e7])
+    a3=alert("info", "Extrapolation",
+            [e7])
 
-    p_en=page("COVID-19 Statistics", 
-           [a0, a1, a2])#, a3])
+    p_eng =page("COVID-19 Statistics", 
+           [a0, a1, a2, a3])#])
 
-    save_page(p_en, "plots/index.html")
+    save_page(p_eng, folder+"/index_ENG.html")
     
     
     add_navbar_to_plots()

@@ -7,7 +7,7 @@ import pandas as pd
 import numpy as np
 from dropbox_api import update_on_dropbox
 from index import generate_index
-#from gauss import Gauss
+from gauss import Gauss
 
 cf.go_offline()
 init_notebook_mode(connected=True)
@@ -32,7 +32,9 @@ countries_to_track = [
     'Brazil'
 ]
 
-states_to_track = ['Illinois', 'Massachusetts']
+states_to_track = ['Illinois', 'Massachusetts','Ohio']
+
+counties_to_track = ['Suffolk']
 
 ###
 
@@ -299,43 +301,41 @@ cf.iplot(figure=fig,
          asUrl=True)
 
 
-#def plot_fit(series, filename):
-#    y=series.tolist()
-#    x = np.array(range(len(y)))
-#    gauss = Gauss(x,y)
-#    y_pred = gauss.fit()
-#    fit_series = pd.Series(y_pred, series.index, name="Fitted Curve")
+def plot_fit(series, filename):
+   y=series.tolist()
+   x = np.array(range(len(y)))
+   gauss = Gauss(x,y)
+   y_pred = gauss.fit()
+   fit_series = pd.Series(y_pred, series.index, name="Fitted Curve")
     
-#    _,m,s = gauss.par
-#    current = int(sum(y))
-#    estimate = gauss.estimate_total()
+   _,m,s = gauss.par
+   current = int(sum(y))
+   estimate = gauss.estimate_total()
     
-#    fig1 = series.iplot(kind="bar",asFigure=True)
-#    fig2 = fit_series.iplot(asFigure=True,
-#                            colors=['blue'],
-#                            width=2,
-#                            dash="dashdot")
+   fig1 = series.iplot(kind="bar",asFigure=True)
+   fig2 = fit_series.iplot(asFigure=True,
+                           colors=['blue'],
+                           width=2,
+                           dash="dashdot")
 
-#    fig = cf.tools.merge_figures([fig1, fig2])
-#    fig = go.Figure(fig)
-#    fig.update_layout(
-#        title_text="Total Infection Estimate<br>-------------------------------"\
-#                   "<br>Current: {} people,"\
-#                   " Estimate: {} people".format(current,estimate),
-#        yaxis_title="Capita [-]")
+   fig = cf.tools.merge_figures([fig1, fig2])
+   fig = go.Figure(fig)
+   fig.update_layout(
+       title_text="Total Infection Estimate<br>-------------------------------"\
+                  "<br>Current: {} people,"\
+                  " Estimate: {} people".format(current,estimate),
+       yaxis_title="Capita [-]")
     
-#    cf.iplot(figure=fig,
-#             asUrl=True, 
-#             filename=filename)
-#    return
+   cf.iplot(figure=fig,
+            asUrl=True, 
+            filename=filename)
+   return
 
-#for country in worst:
-#    plot_fit(all_growth[country],
-#             filename = plot_folder+"/{}_est".format(country))
+for country in worst: 
+    plot_fit(all_growth[country], filename = plot_folder+"/{}_est".format(country))
 
-#for state in states_to_track:
-#    plot_fit(all_growth_us[state],
-#             filename = plot_folder+"/{}_est".format(state))
+for state in states_to_track:
+    plot_fit(all_growth_us[state], filename = plot_folder+"/{}_est".format(state))
 
 rec_dea_unk.loc[countries_to_track].iplot(
     kind="bar", 
